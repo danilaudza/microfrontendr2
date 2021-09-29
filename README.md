@@ -1,6 +1,6 @@
-# Micro Frontend R2
+# Implementasi Micro FrontEnd Komponen Display Item Buku pada Halaman Publisher Buku
 
-## Anggota
+## Anggota Kelompok R2
 * Dwi Rangga Rhaditya Siwi Widodo (20/455443/PA/19658)
 * Elsa Ramadhani (20/459263/PA/19924)
 * Faris Qanit (20/462180/PA/20152)
