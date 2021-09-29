@@ -20,3 +20,8 @@
 ## Hasil
 
 Link Untuk hasil: https://microfrontedr2.w3spaces.com/
+
+
+## Kendala :
+* Anggota kelompok masih ada yang kurang memahami Javascript dan/atau tools lainnya yang digunakan sehingga perlu mempelajari terlebih dahulu
+* Kesulitan dalam mendesain website
