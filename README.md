@@ -11,7 +11,7 @@
 ## Pembagian Tim
 * Tim 1 : Dhany, Farhan, Devi (bertanggung jawab akan komponen buku terbaru)
 
-* Tim 2 : Dwi Rangga, Elsa, Faris (Tim 2 bertanggungjawab akan komponen buku terpopuler)
+* Tim 2 : Dwi Rangga, Elsa, Faris (bertanggungjawab akan komponen buku terpopuler)
 
   Masing-masing tim mengerjakan secara bersama dan berkoordinasi melalui google meet
 
