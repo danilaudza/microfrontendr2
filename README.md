@@ -9,9 +9,9 @@
 * Devi Ayu Rachmawati (21/488637/NPA/19753)
 
 ## Pembagian Tim
-* Tim 1 : Dhany, Farhan, Devi (bertanggung jawab akan komponen buku terbaru)
+* Tim 1 : Dhany, Farhan, Devi (bertanggung jawab akan komponen list buku, footer, dan navbar)
 
-* Tim 2 : Dwi Rangga, Elsa, Faris (bertanggungjawab akan komponen buku terpopuler)
+* Tim 2 : Dwi Rangga, Elsa, Faris (bertanggungjawab akan komponen buku terpopuler, dan terbaru)
 
   Masing-masing tim mengerjakan secara bersama dan berkoordinasi melalui google meet
 
