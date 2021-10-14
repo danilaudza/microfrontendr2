@@ -6,7 +6,73 @@ class Navbar extends HTMLElement{
     }
 
     connectedCallback(){
+        
         this.render();
+        
+        function toggle(docs){
+          const btn = docs.querySelector("button.mobile-menu-button");
+          const menu = docs.querySelector(".mobile-menu");
+          btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+          });
+        }
+        
+        toggle(this.shadowRoot);
+
+        function jmp(docs) {
+          const tentangscr = docs.querySelector(".tentang");
+          tentangscr.addEventListener("click", () => {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "smooth"
+            });
+          })
+        }
+
+        function buku(docs) {
+          const bukuscr = docs.querySelector(".buku");
+          bukuscr.addEventListener("click", () => {
+            window.scrollTo({
+              top: docs.querySelector(".listBuku"),
+              behavior: "smooth"
+            });
+          })
+        }
+
+        function beranda(docs) {
+          const berandascr = docs.querySelector(".beranda");
+          berandascr.addEventListener("click", () => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          })
+        }
+
+        beranda(this.shadowRoot);
+        buku(this.shadowRoot);
+        jmp(this.shadowRoot);
+
+        function changeButt(docs) {
+          var elem = docs.getElementById("search");
+          elem.addEventListener("click", () => {
+            elem.id="semrawut";
+            elem.innerHTML = `
+              <div class="box">
+                <div class="container-1">
+                  <span class="icon"><i class="fa fa-search"></i></span>
+                  <input type="search" id="search" placeholder="Search..." />
+                </div>
+              </div>
+            `;
+          })
+            
+      }
+
+      changeButt(this.shadowRoot)
+      
+
+        
     }
 
     render(){
@@ -16,7 +82,7 @@ class Navbar extends HTMLElement{
         <style>
         @import "tailwind.css";
         </style>
-        <nav class="container mx-auto px-1 font-display">
+        <nav class="z-50 bg-white fixed top-0 mx-auto w-full font-display">
         <div class="max-w-screen mx-auto px-4">
           <div class="flex justify-between">
       
@@ -30,15 +96,16 @@ class Navbar extends HTMLElement{
       
               <!-- primary nav -->
               <div class="hidden md:flex items-center text-gray-800 space-x-1">
-                <a href="#" class="py-5 px-3  hover:text-gray-900">Beranda</a>
-                <a href="#" class="py-5 px-3  hover:text-gray-900">Buku</a>
-                <a href="#" class="py-5 px-3  hover:text-gray-900">Tentang</a>
+                <a class="py-5 px-3  hover:text-gray-900 beranda">Beranda</a>
+                <a class="py-5 px-3  hover:text-gray-900 buku">Buku</a>
+                <a class="py-5 px-3  hover:text-gray-900 tentang">Tentang</a>
+                <a class="py-5 px-3  hover:text-gray-900 tentang">DarkMode</a>
               </div>
             </div>
       
             <!-- secondary nav -->
             <div class="hidden md:flex items-center space-x-1">
-              <button type="button" class="bg-red-500 text-white rounded-md px-7 py-3">Search</button>
+              <button id="search" type="button" class="bg-red-500 text-white rounded-md px-7 py-3">Search</button>
             </div>
       
             <!-- mobile button goes here -->
@@ -61,7 +128,7 @@ class Navbar extends HTMLElement{
         </div>
       </nav>
         `;
-
+        
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
 }
@@ -86,7 +153,7 @@ class Footer extends HTMLElement{
         <style>
         @import "tailwind.css";
         </style>
-        <div class="bg-gray-800 text-center text-white font-display py-20 flex flex-col md:flex-row md:justify-around">
+        <div id="tentang" class="bg-gray-800 text-center text-white font-display py-20 flex flex-col md:flex-row md:justify-around">
         <div class="flex flex-col items-center py-5 md:items-start">
             <h3 class="text-xl font-bold">Tentang Kami</h3>
             <h4>Nama Penerbit</h4>
@@ -125,6 +192,26 @@ export default class Buku extends HTMLElement{
 
     connectedCallback(){
         this.render();
+        function zoom(docs){
+          const image = docs.querySelector(".card")
+          image.addEventListener("mouseover", () => {
+            image.classList.remove('bg-white')
+            image.classList.add('shadow-sm')
+            image.classList.remove('shadow-lg')
+            image.classList.add('bg-indigo-100')
+            
+            
+          })
+          image.addEventListener("mouseleave", () => {
+            image.classList.add('bg-white')
+            image.classList.add('shadow-lg')
+            image.classList.remove('shadow-sm')
+            image.classList.remove('bg-indigo-100')
+            
+          })
+        }
+        zoom(this.shadowRoot)
+
       }
 
     render(){
@@ -135,10 +222,10 @@ export default class Buku extends HTMLElement{
         @import "tailwind.css";
         </style>
         
-        <div class="p-10 font-display">  
+        <div class="listBuku p-10 font-display">  
             <!--Card-->
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                <div class="flex justify-center items-center mt-5">
+            <div class="card max-w-sm rounded overflow-hidden bg-white shadow-lg transition-all">
+                <div class="flex justify-center items-center mt-5 ">
                     <img class="h-48" src="${this.getAttribute('imageSrc')}">
                 </div>
                 <div class="px-6 py-4">
@@ -168,10 +255,6 @@ export default class Buku extends HTMLElement{
 
 window.customElements.define('buku-buku', Buku);
 
-
-{/* <h3 >${this.getAttribute('title')}</h3>
-<img src="${this.getAttribute('imageSrc')}"/>
-<p>${this.slot}</p> */}
 async function fetchBook() {
     const res = await fetch('https://dmujitempbagifile.s3.ap-southeast-1.amazonaws.com/buku.json');
     return res.json();
@@ -198,3 +281,5 @@ document.addEventListener('DOMContentLoaded', async () => {
         bukuContainer.appendChild(books);
     });
 });
+
+

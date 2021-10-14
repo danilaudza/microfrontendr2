@@ -2,6 +2,7 @@ class newBook extends HTMLElement {
     constructor() {
       super();
       this.root = this.attachShadow({mode:'open'});
+      
     }
       set buku(buku) {
       this.root.innerHTML = `
@@ -20,7 +21,7 @@ class newBook extends HTMLElement {
                         ${buku.promo_text}
                     </p>
                 <div class="flex justify-center flex-wrap gap-6">
-                    <button type="button" class="font-display text-white py-2 px-3 shadow-lg rounded-md btn bg-indigo-500 hover:bg-white transition-all hover:text-black">
+                    <button onClick="klikBeli()" type="button" class="buttonStore font-display text-white py-2 px-3 shadow-lg rounded-md btn bg-indigo-500 transition-all ">
                         Get it on Store
                     </button>
                 </div>
@@ -44,7 +45,10 @@ class newBook extends HTMLElement {
 
         <div class="container mx-auto">
             <div class="font-display flex flex-col lg:flex-row flex-wrap items-center mt-10">
-                <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
+            
+            <button class="buttonAction revButton font-display text-white py-2 px-3 shadow-lg rounded-md btn bg-indigo-500 transition-all " >Show review</button>
+                
+                <div class="review hidden max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
                     <div>
                         <p class="mt-2 text-gray-600">${buku.reviews[0].review}</p>
                     </div>
@@ -52,7 +56,7 @@ class newBook extends HTMLElement {
                         <p class="text-xl font-medium text-indigo-500">${buku.reviews[0].user}</p>
                     </div>
                 </div>
-                <div class="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
+                <div class="review2 hidden max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
                     <div>
                         <p class="mt-2 text-gray-600">${buku.reviews[1].review}</p>
                     </div>
@@ -87,6 +91,11 @@ class newBook extends HTMLElement {
             
     
       `;
+
+      show(this.shadowRoot)
+      change(this.shadowRoot)
+      mouseButton(this.shadowRoot)
+      mouseButton2(this.shadowRoot)
     } 
 }
 window.customElements.define('book-item', newBook);
@@ -152,7 +161,10 @@ class popBook extends HTMLElement {
                 ></div>
 
                 <div class="container mx-auto flex flex-col lg:flex-row flex-wrap mx-20 items-center mt-10">
-                    <div class="flex-grow max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
+                  
+                <button class="buttonAction revButton font-display text-white py-2 px-3 shadow-lg rounded-md btn bg-indigo-500 transition-all">Show review</button>
+
+                    <div class="review hidden flex-grow max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
                         <div>
                             <p class="mt-2 text-gray-600">${buku.reviews[0].review}</p>
                         </div>
@@ -160,7 +172,7 @@ class popBook extends HTMLElement {
                             <p class="text-xl font-medium text-indigo-500">${buku.reviews[0].user}</p>
                         </div>
                     </div>
-                    <div class="flex-grow max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
+                    <div class="review2 hidden flex-grow max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-4 mx-4">
                         <div>
                             <p class="mt-2 text-gray-600">${buku.reviews[1].review}</p>
                         </div>
@@ -175,6 +187,10 @@ class popBook extends HTMLElement {
             
         </section>
       `;
+      show(this.shadowRoot)
+      change(this.shadowRoot)
+      mouseButton(this.shadowRoot)
+      
     } 
 }
 window.customElements.define('book-pop', popBook);
@@ -194,6 +210,69 @@ window.customElements.define('book-pop', popBook);
         topnew.appendChild(temp); 
       }
     });
+  }
+
+  function show(docs){
+    const btn = docs.querySelector("button.revButton");
+    const rev = docs.querySelector(".review");
+    const rev2 = docs.querySelector(".review2");
+    btn.addEventListener("click", () => {
+      rev.classList.toggle("hidden");
+      rev2.classList.toggle("hidden");
+    });
+  }
+
+  function change(docs){
+    const btn = docs.querySelector("button.revButton");
+    btn.addEventListener("click", () => {
+      if(btn.innerHTML == "Show review"){
+        btn.innerHTML = "Hide review";
+      }else if(btn.innerHTML == "Hide review"){
+        btn.innerHTML = "Show review";
+      }
+      
+    });
+  }
+
+  function klikBeli() {
+    alert("Buku telah dikirim ke alamat anda!");
+  }
+
+  function mouseButton(docs){
+    const btn = docs.querySelector(".buttonAction")
+    btn.addEventListener("mouseover", () => {
+      btn.classList.remove('bg-indigo-500')
+      btn.classList.add('bg-white')
+      btn.classList.remove('text-white')
+      btn.classList.add('text-black')
+    })
+    btn.addEventListener("mouseleave", () => {
+      btn.classList.remove('bg-white')
+      btn.classList.add('bg-indigo-500')
+      btn.classList.remove('text-black')
+      btn.classList.add('text-white')
+    })
+  }
+
+  function mouseButton2(docs){
+    const btn = docs.querySelector(".buttonStore")
+    btn.addEventListener("mouseover", () => {
+      btn.classList.remove('bg-indigo-500')
+      btn.classList.add('bg-white')
+      btn.classList.remove('text-white')
+      btn.classList.add('text-black')
+    })
+    btn.addEventListener("mouseleave", () => {
+      btn.classList.remove('bg-white')
+      btn.classList.add('bg-indigo-500')
+      btn.classList.remove('text-black')
+      btn.classList.add('text-white')
+    })
+  }
+
+  function darkMode() {
+    var element = document.body;
+    element.classList.add("dark-mode");
   }
   
   tampilkan();
